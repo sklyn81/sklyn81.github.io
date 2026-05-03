@@ -12,6 +12,7 @@
             --accent: #3b82f6;
             --accent-hover: #2563eb;
             --close-bg: #ef4444; 
+            --pdf-bg: #1e293b; /* PDF 버튼용 차분한 색상 */
             --text-p: #ffffff;
             --text-s: #94a3b8;
             --glass: rgba(255, 255, 255, 0.05);
@@ -21,7 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg-main); color: var(--text-p); display: flex; height: 100vh; overflow: hidden; }
 
-        /* 토글 버튼 디자인 */
+        /* 토글 버튼 */
         .menu-toggle {
             position: fixed; top: 20px; left: 20px; z-index: 1001;
             background: var(--close-bg); color: white; border: none;
@@ -50,20 +51,23 @@
         .contact-box div { margin-bottom: 8px; color: var(--accent); font-weight: bold; }
         .contact-box span { color: var(--text-p); font-weight: normal; }
 
-        /* 네비게이션 그룹 및 버튼 */
         .nav-group { margin-top: 25px; }
         .nav-title { font-size: 0.75rem; color: var(--text-s); font-weight: 800; margin-bottom: 10px; letter-spacing: 1.5px; }
-        nav button {
+        nav button, .pdf-link {
             width: 100%; text-align: left; padding: 14px 15px; background: none; border: none;
             color: var(--text-s); cursor: pointer; transition: 0.3s; font-size: 0.95rem; border-radius: 8px;
-            display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 10px; margin-bottom: 4px; text-decoration: none;
         }
-        nav button:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        nav button:hover, .pdf-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
         nav button.active { background: var(--accent); color: #fff; font-weight: 600; }
 
-        /* [추가] 하위 메뉴 스타일 */
         .sub-menu { margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 5px; margin-bottom: 10px; }
         .sub-menu button { padding: 10px 15px; font-size: 0.85rem; }
+
+        /* [추가] PDF 버튼 전용 스타일 */
+        .pdf-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .pdf-link { background: var(--pdf-bg); color: #fff; font-weight: 500; border: 1px solid rgba(255,255,255,0.05); }
+        .pdf-link i { color: #f87171; } /* PDF 아이콘은 붉은색 포인트 */
 
         /* 메인 콘텐츠 */
         main { flex: 1; padding: 40px 40px 40px 60px; overflow-y: auto; transition: 0.4s; position: relative; scroll-behavior: smooth; }
@@ -106,11 +110,9 @@
 
         <div class="nav-group">
             <div class="nav-title">RESUME</div>
-            <!-- 메인 버튼 -->
             <button onclick="showPage('intro')" class="active" id="btn-intro">
                 <i class="fa-solid fa-address-card"></i> 소개 및 역량
             </button>
-            <!-- [수정] 하위 메뉴 구성 -->
             <div class="sub-menu">
                 <button onclick="scrollToSection('phil')"><i class="fa-solid fa-lightbulb"></i> 개발 철학</button>
                 <button onclick="scrollToSection('ai-part')"><i class="fa-solid fa-robot"></i> AI 실무 활용</button>
@@ -123,40 +125,45 @@
             <button onclick="showPage('sys1')"><i class="fa-solid fa-gears"></i> 시스템 기획</button>
             <button onclick="showPage('con1')"><i class="fa-solid fa-gamepad"></i> 콘텐츠 기획</button>
         </div>
+
+        <!-- [추가] PDF 다운로드 링크 그룹 -->
+        <div class="nav-group pdf-group">
+            <div class="nav-title">DOCUMENTS (PDF)</div>
+            <a href="포트폴리오_최성근.pdf" target="_blank" class="pdf-link">
+                <i class="fa-solid fa-file-pdf"></i> 포트폴리오 다운로드
+            </a>
+            <a href="이력서_최성근.pdf" target="_blank" class="pdf-link">
+                <i class="fa-solid fa-file-invoice"></i> 이력서 다운로드
+            </a>
+            <a href="경력기술서_최성근.pdf" target="_blank" class="pdf-link">
+                <i class="fa-solid fa-file-lines"></i> 경력기술서 다운로드
+            </a>
+        </div>
     </nav>
 
     <main id="main-content">
-        <!-- 소개 및 역량 섹션 (개발 철학, AI 활용 포함) -->
         <section id="intro" class="content-section active">
             <h2><i class="fa-solid fa-user-tie"></i> Introduction</h2>
             
-            <!-- 1. 지원동기 및 전문성 -->
             <div class="card">
                 <span class="highlight">◆ 지원동기 및 전문성</span>
-                <p>20년 경력의 전문성을 바탕으로 게임의 본질을 설계합니다. 특히 유니티와 언리얼5 엔진 활용 능력을 갖추어 배경팀과 긴밀하게 협업하며 비주얼 목업을 즉각 구현할 수 있는 실무 최적화 기획자입니다.</p>
+                <p>20년 경력의 전문성을 바탕으로 게임의 본질을 설계합니다. 유니티와 언리얼5 엔진 활용 능력을 갖추어 비주얼 목업을 즉각 구현할 수 있는 실무 최적화 기획자입니다.</p>
             </div>
 
-            <!-- 2. 개발 철학 (ID 추가) -->
             <div class="card" id="phil">
                 <span class="highlight">◆ 개발 철학</span>
                 <p style="font-weight: 600; color: #fff; margin-bottom: 10px;">"콘텐츠의 본질은 '몰입'이며, 기획은 그 몰입의 시간을 설계하는 예술입니다."</p>
-                <p>유저가 게임 속 세계관과 메커니즘에 깊이 빠져들어 새로운 정보와 내러티브를 체득할 때, 인간은 본능적인 '재미'를 느낍니다. 정교한 '흐름(Flow)'을 만드는 것이 기획자의 사명이라 믿으며, 수치화된 지표를 바탕으로 최상의 몰입 경험을 설계하고자 합니다.</p>
+                <p>유저가 게임 속 세계관과 메커니즘에 깊이 빠져들어 새로운 정보와 내러티브를 체득할 때, 인간은 본능적인 '재미'를 느낍니다. 정교한 '흐름(Flow)'을 만드는 것이 기획자의 사명입니다.</p>
             </div>
 
-            <!-- 3. AI 실무 활용 (기존 섹션을 intro 안으로 이동 및 ID 변경) -->
             <div class="card" id="ai-part">
                 <span class="highlight">◆ AI 실무 활용</span>
                 <p style="font-style: italic; margin-bottom: 15px; color: var(--text-s);">"AI는 생각의 확장과 시각적 커뮤니케이션을 가속화하는 저의 가장 강력한 부사수입니다."</p>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 10px;"><strong>• 논리 정교화:</strong> 기획 초안의 허점 검증 및 데이터 시뮬레이션</li>
                     <li style="margin-bottom: 10px;"><strong>• 즉각적 시각화:</strong> 이미지 생성 AI 컨셉 아트로 개발팀과 오차 없는 소통</li>
-                    <li><strong>• 효율 혁신:</strong> 데이터 분석 및 요약을 통한 기획 본질 집중 시간 확보</li>
+                    <li><strong>• 효율 혁신:</strong> 데이터 분석 및 요약을 통한 본질 집중 시간 확보</li>
                 </ul>
-            </div>
-
-            <div class="card">
-                <span class="highlight">◆ 성격의 장단점</span>
-                <p>스스럼없고 무난한 성격으로 팀 분위기를 주도하며, 협업 부서와 강력한 신뢰 관계를 형성하여 프로젝트의 시행착오를 최소화합니다.</p>
             </div>
         </section>
 
@@ -166,7 +173,6 @@
             <div class="ppt-viewer">
                 <h3 style="margin-bottom: 20px;">유니티, 언리얼5 기반 실무</h3>
                 <p><strong>• 로드나인 (NX3게임즈)</strong>: 필드 및 던전 약 44개 제작 총괄. 후디니 절차적 레벨 디자인 도입.</p>
-                <p style="margin-top:10px;"><strong>• 에스카 (모비릭스)</strong>: CubeGrid, Landscape 등 기획 모델링 툴 활용으로 명확한 의도 전달.</p>
             </div>
         </section>
 
@@ -179,17 +185,14 @@
             document.body.classList.toggle('sidebar-closed');
         }
 
-        // 페이지 전환 함수
         function showPage(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            // 만약 id가 intro 관련이면 메인 버튼 활성화
             if(id === 'intro') {
                 document.getElementById('btn-intro').classList.add('active');
             } else {
-                if(event) event.currentTarget.classList.add('active');
+                if(event && event.currentTarget.tagName === 'BUTTON') event.currentTarget.classList.add('active');
             }
 
             if (window.innerWidth <= 1024) {
@@ -198,16 +201,11 @@
             document.getElementById('main-content').scrollTo(0, 0);
         }
 
-        // [추가] 같은 페이지 내 특정 섹션으로 이동하는 함수
         function scrollToSection(sectionId) {
-            // 먼저 intro 페이지를 보여주고
             showPage('intro');
-            // 해당 ID 위치로 스크롤
             const target = document.getElementById(sectionId);
             if (target) {
-                setTimeout(() => {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                setTimeout(() => { target.scrollIntoView({ behavior: 'smooth' }); }, 100);
             }
         }
 
