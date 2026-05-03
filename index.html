@@ -12,7 +12,7 @@
             --accent: #3b82f6;
             --accent-hover: #2563eb;
             --close-bg: #ef4444; 
-            --pdf-bg: #1e293b; /* PDF 버튼용 차분한 색상 */
+            --pdf-bg: #1e293b; 
             --text-p: #ffffff;
             --text-s: #94a3b8;
             --glass: rgba(255, 255, 255, 0.05);
@@ -53,21 +53,21 @@
 
         .nav-group { margin-top: 25px; }
         .nav-title { font-size: 0.75rem; color: var(--text-s); font-weight: 800; margin-bottom: 10px; letter-spacing: 1.5px; }
-        nav button, .pdf-link {
+        nav button, .link-btn {
             width: 100%; text-align: left; padding: 14px 15px; background: none; border: none;
             color: var(--text-s); cursor: pointer; transition: 0.3s; font-size: 0.95rem; border-radius: 8px;
             display: flex; align-items: center; gap: 10px; margin-bottom: 4px; text-decoration: none;
         }
-        nav button:hover, .pdf-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        nav button:hover, .link-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
         nav button.active { background: var(--accent); color: #fff; font-weight: 600; }
 
         .sub-menu { margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 5px; margin-bottom: 10px; }
         .sub-menu button { padding: 10px 15px; font-size: 0.85rem; }
 
-        /* [추가] PDF 버튼 전용 스타일 */
-        .pdf-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); }
-        .pdf-link { background: var(--pdf-bg); color: #fff; font-weight: 500; border: 1px solid rgba(255,255,255,0.05); }
-        .pdf-link i { color: #f87171; } /* PDF 아이콘은 붉은색 포인트 */
+        /* 문서 링크 전용 스타일 */
+        .doc-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .link-btn { background: var(--pdf-bg); color: #fff; font-weight: 500; border: 1px solid rgba(255,255,255,0.05); }
+        .link-btn i { color: #f87171; } 
 
         /* 메인 콘텐츠 */
         main { flex: 1; padding: 40px 40px 40px 60px; overflow-y: auto; transition: 0.4s; position: relative; scroll-behavior: smooth; }
@@ -126,17 +126,19 @@
             <button onclick="showPage('con1')"><i class="fa-solid fa-gamepad"></i> 콘텐츠 기획</button>
         </div>
 
-        <!-- [추가] PDF 다운로드 링크 그룹 -->
-        <div class="nav-group pdf-group">
-            <div class="nav-title">DOCUMENTS (PDF)</div>
-            <a href="포트폴리오_최성근.pdf" target="_blank" class="https://drive.google.com/file/d/19r0gSrB8jTq3MCXTDLg_Q_MCSt0JhbsC/view?usp=drive_link">
-                <i class="fa-solid fa-file-pdf"></i> 포트폴리오 다운로드
+        <!-- [수정] 외부 링크 연결 구역 -->
+        <div class="nav-group doc-group">
+            <div class="nav-title">DOCUMENTS (EXTERNAL LINKS)</div>
+            
+            <!-- 아래 href="..." 부분에 실제 링크 주소를 넣으세요 -->
+            <a href="https://drive.google.com/file/d/1B2TBc-md9OE7byvf5KtHImr_oWwp97iJ/view?usp=drive_link" target="_blank" class="link-btn">
+                <i class="fa-solid fa-file-pdf"></i> 포트폴리오 (GoogleDrv 외부 링크)
             </a>
-            <a href="이력서&경력기술서_최성근.pdf" target="_blank" class="https://drive.google.com/file/d/1B2TBc-md9OE7byvf5KtHImr_oWwp97iJ/view?usp=drive_link">
-                <i class="fa-solid fa-file-invoice"></i> 이력서 다운로드
+            <a href="https://drive.google.com/file/d/19r0gSrB8jTq3MCXTDLg_Q_MCSt0JhbsC/view?usp=drive_link" target="_blank" class="link-btn">
+                <i class="fa-solid fa-file-invoice"></i> 이력서+경력기술서 (GoogleDrv 외부 링크)
             </a>
-            <a href="로그라이크 콘텐츠 제안서(예시).pdf" target="_blank" class="https://drive.google.com/file/d/1J-bUJqVOO46JEYXh0v9Q8G43YdAXUnzR/view?usp=drive_link">
-                <i class="fa-solid fa-file-lines"></i> 경력기술서 다운로드
+            <a href="https://drive.google.com/file/d/1J-bUJqVOO46JEYXh0v9Q8G43YdAXUnzR/view?usp=drive_link" class="link-btn">
+                <i class="fa-solid fa-file-lines"></i> 로그라이크형 콘텐츠 제안서(예시) (GoogleDrv 외부 링크)
             </a>
         </div>
     </nav>
