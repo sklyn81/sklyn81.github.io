@@ -10,8 +10,8 @@
             --bg-main: #0a0e17;
             --sidebar-bg: #151c2c;
             --accent: #3b82f6;
-            --accent-dark: #1d4ed8;
-            --danger: #ef4444;
+            --accent-hover: #2563eb;
+            --close-bg: #ef4444; /* 닫기 버튼일 때 빨간색 계열로 대비 */
             --text-p: #ffffff;
             --text-s: #94a3b8;
             --glass: rgba(255, 255, 255, 0.05);
@@ -21,35 +21,36 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg-main); color: var(--text-p); display: flex; height: 100vh; overflow: hidden; }
 
-        /* [수정] 상태에 따라 디자인이 변하는 토글 버튼 */
+        /* [핵심] 상태에 따라 아이콘과 색상이 확실히 변하는 토글 버튼 */
         .menu-toggle {
-            position: fixed; top: 20px; left: 20px; z-index: 1000;
-            background: var(--accent); color: white; border: none;
-            width: 45px; height: 45px; border-radius: 12px; cursor: pointer;
+            position: fixed; top: 20px; left: 20px; z-index: 1001;
+            background: var(--close-bg); /* 열려 있을 땐 닫기 위해 눈에 띄는 색 */
+            color: white; border: none;
+            width: 50px; height: 50px; border-radius: 12px; cursor: pointer;
             display: flex; align-items: center; justify-content: center; 
-            font-size: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            font-size: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.5); 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        /* 메뉴가 닫혔을 때 버튼 디자인 변경 */
+
+        /* 메뉴가 닫혔을 때 버튼: 파란색 햄버거 버튼으로 변경 */
         body.sidebar-closed .menu-toggle {
-            background: var(--accent-dark);
-            border-radius: 50%;
+            background: var(--accent);
             transform: rotate(180deg);
         }
-        .menu-toggle i { transition: 0.3s; }
-        body.sidebar-closed .menu-toggle i::before { content: "\f0c9"; } /* 햄버거 아이콘 */
-        body:not(.sidebar-closed) .menu-toggle i::before { content: "\f060"; } /* 화살표 아이콘 */
+
+        /* FontAwesome 아이콘 교체 애니메이션 */
+        .menu-toggle i::before { content: "\f00d"; transition: 0.3s; } /* 기본: X (Close) */
+        body.sidebar-closed .menu-toggle i::before { content: "\f0c9"; } /* 닫혔을 때: ≡ (Menu) */
 
         /* 사이드바 스타일 */
         nav {
-            width: var(--sidebar-width); background: var(--sidebar-bg); padding: 80px 20px 30px;
+            width: var(--sidebar-width); background: var(--sidebar-bg); padding: 85px 20px 30 :root 0px;
             display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.1);
             overflow-y: auto; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; flex-shrink: 0; z-index: 999;
+            position: relative; flex-shrink: 0; z-index: 1000;
         }
 
-        body.sidebar-closed nav { margin-left: calc(var(--sidebar-width) * -1); opacity: 0; }
+        body.sidebar-closed nav { margin-left: calc(var(--sidebar-width) * -1); opacity: 0; pointer-events: none; }
 
         .profile-area { text-align: center; margin-bottom: 30px; }
         .profile-img { 
@@ -61,7 +62,6 @@
         .contact-box { background: var(--glass); padding: 15px; border-radius: 10px; font-size: 0.85rem; text-align: left; }
         .contact-box div { margin-bottom: 8px; color: var(--accent); font-weight: bold; }
         .contact-box span { color: var(--text-p); font-weight: normal; }
-        .copy-btn { cursor: pointer; }
         #copyNotice { color: #10b981; font-size: 0.7rem; display: none; margin-left: 5px; }
 
         .nav-group { margin-top: 25px; }
@@ -72,11 +72,11 @@
             display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
         }
         nav button:hover { background: rgba(255,255,255,0.08); color: #fff; }
-        nav button.active { background: var(--accent); color: #fff; font-weight: 600; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+        nav button.active { background: var(--accent); color: #fff; font-weight: 600; }
 
         /* 메인 콘텐츠 */
         main { flex: 1; padding: 40px 40px 40px 60px; overflow-y: auto; transition: 0.4s; position: relative; }
-        body.sidebar-closed main { padding-left: 80px; }
+        body.sidebar-closed main { padding-left: 90px; }
 
         .content-section { display: none; animation: fadeIn 0.4s ease-out; max-width: 1100px; margin: 0 auto; }
         .content-section.active { display: block; }
@@ -84,25 +84,22 @@
 
         h2 { font-size: 2.2rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; color: var(--text-p); }
         .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; margin-bottom: 25px; line-height: 1.8; }
-        .highlight { color: var(--accent); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
+        .highlight { color: var(--accent); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 5px; }
         
-        .ppt-viewer { background: #1e293b; border-radius: 15px; min-height: 400px; padding: 40px; border: 1px solid var(--accent); position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .ppt-tag { position: absolute; top: 20px; right: 20px; background: var(--accent); font-size: 0.7rem; padding: 4px 10px; border-radius: 4px; }
-        .ppt-viewer img { width: 100%; border-radius: 8px; margin-top: 15px; }
+        .ppt-viewer { background: #1e293b; border-radius: 15px; min-height: 400px; padding: 40px; border: 1px solid var(--accent); position: relative; }
+        .ppt-viewer img { width: 100%; border-radius: 8px; margin-top: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* [모바일 대응] 모바일에서도 메뉴가 기본적으로 보이도록 설정 */
+        /* 모바일 대응 */
         @media (max-width: 1024px) {
             nav { position: fixed; height: 100%; width: 280px; box-shadow: 20px 0 50px rgba(0,0,0,0.8); }
-            --sidebar-width: 280px;
-            main { padding: 90px 20px 40px !important; }
+            main { padding: 100px 20px 40px !important; }
             h2 { font-size: 1.8rem; }
-            .card { padding: 20px; }
         }
     </style>
 </head>
-<body class=""> <!-- 기본적으로 열린 상태 -->
+<body>
 
-    <button class="menu-toggle" onclick="toggleSidebar()" title="메뉴 열기/닫기">
+    <button class="menu-toggle" onclick="toggleSidebar()">
         <i class="fa-solid"></i>
     </button>
 
@@ -111,7 +108,7 @@
             <img src="최성근_이력서.png" alt="최성근" class="profile-img">
             <h3 style="margin-bottom: 10px;">최성근</h3>
             <div class="contact-box">
-                <div class="copy-btn" onclick="copyEmail('windcraw@naver.com')">
+                <div style="cursor:pointer;" onclick="copyEmail('windcraw@naver.com')">
                     Email: <span>windcraw@naver.com</span>
                     <i class="fa-regular fa-copy" style="font-size: 0.7rem;"></i>
                     <span id="copyNotice">복사됨!</span>
@@ -122,12 +119,12 @@
 
         <div class="nav-group">
             <div class="nav-title">INTRODUCTION</div>
-            <button onclick="showPage('intro')" class="active"><i class="fa-solid fa-address-card"></i> 소개 및 강점</button>
+            <button onclick="showPage('intro')" class="active"><i class="fa-solid fa-address-card"></i> 소개 및 역량</button>
             <button onclick="showPage('ai-strategy')"><i class="fa-solid fa-robot"></i> AI 전략적 활용</button>
         </div>
 
         <div class="nav-group">
-            <div class="nav-title">PLANNING BOX</div>
+            <div class="nav-title">PORTFOLIO 슬라이드</div>
             <button onclick="showPage('level3d')"><i class="fa-solid fa-cube"></i> 3D 레벨 디자인</button>
             <button onclick="showPage('sys1')"><i class="fa-solid fa-gears"></i> 시스템 기획</button>
             <button onclick="showPage('con1')"><i class="fa-solid fa-gamepad"></i> 콘텐츠 기획</button>
@@ -138,8 +135,8 @@
         <section id="intro" class="content-section active">
             <h2><i class="fa-solid fa-user-tie"></i> Introduction</h2>
             <div class="card">
-                <span class="highlight">◆ 지원동기 및 역량</span>
-                <p>20년 경력의 전문성을 바탕으로 게임의 본질인 '몰입'을 설계합니다. 특히 유니티와 언리얼5 엔진 활용 능력을 갖추어 배경팀과 긴밀하게 협업하며 비주얼 목업을 즉각 구현할 수 있는 실무 최적화 기획자입니다.</p>
+                <span class="highlight">◆ 지원동기 및 전문성</span>
+                <p>20년 경력의 전문성을 바탕으로 게임의 본질을 설계합니다. 특히 유니티와 언리얼5 엔진 활용 능력을 갖추어 배경팀과 긴밀하게 협업하며 비주얼 목업을 즉각 구현할 수 있는 실무 최적화 기획자입니다.</p>
             </div>
             <div class="card">
                 <span class="highlight">◆ 성격의 장단점</span>
@@ -148,13 +145,13 @@
         </section>
 
         <section id="ai-strategy" class="content-section">
-            <h2><i class="fa-solid fa-robot"></i> AI 전략적 파트너십</h2>
+            <h2><i class="fa-solid fa-robot"></i> AI 전략적 활용</h2>
             <div class="card">
                 <p style="font-style: italic; margin-bottom: 25px;">"AI는 생각의 확장과 시각적 커뮤니케이션을 가속화하는 저의 가장 강력한 부사수입니다."</p>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 15px;"><strong>1. 논리 정교화:</strong> 기획 초안의 허점 검증 및 데이터 시뮬레이션</li>
-                    <li style="margin-bottom: 15px;"><strong>2. 즉각적 시각화:</strong> 이미지 생성 AI를 활용한 컨셉 아트로 개발팀과 오차 없는 소통</li>
-                    <li><strong>3. 효율 혁신:</strong> 데이터 분석 및 요약을 통해 기획의 본질 설계에 더 많은 시간 투자</li>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><strong>• 논리 정교화:</strong> 기획 초안의 허점 검증 및 데이터 시뮬레이션</li>
+                    <li style="margin-bottom: 15px;"><strong>• 즉각적 시각화:</strong> 이미지 생성 AI를 활용한 컨셉 아트로 개발팀과 오차 없는 소통</li>
+                    <li><strong>• 효율 혁신:</strong> 데이터 분석 및 요약을 통해 기획의 본질 설계에 더 많은 시간 투자</li>
                 </ul>
             </div>
         </section>
@@ -162,16 +159,14 @@
         <section id="level3d" class="content-section">
             <h2><i class="fa-solid fa-mountain-sun"></i> 3D 레벨 디자인</h2>
             <div class="ppt-viewer">
-                <span class="ppt-tag">CORE EXPERIENCE</span>
-                <h3 style="margin-bottom: 20px;">언리얼5 & 후디니 기반 실무 역량</h3>
-                <p><strong>● 로드나인 (NX3게임즈)</strong>: 필드 및 던전 약 44개 제작 총괄. 절차적 레벨 디자인(Houdini) 도입으로 개발 효율 극대화.</p>
-                <p style="margin-top:10px;"><strong>● 에스카 (모비릭스)</strong>: 모델링 모드 툴 활용, 아트팀에게 기획 의도를 비주얼적으로 명확히 전달.</p>
+                <h3 style="margin-bottom: 20px;">언리얼5 & 후디니 기반 실무</h3>
+                <p><strong>• 로드나인 (NX3게임즈)</strong>: 필드 및 던전 약 44개 제작 총괄. 절차적 레벨 디자인 도입으로 효율 극대화.</p>
+                <p style="margin-top:10px;"><strong>• 에스카 (모비릭스)</strong>: 모델링 모드 툴 활용, 아트팀에게 기획 의도를 비주얼적으로 명확히 전달.</p>
             </div>
         </section>
 
-        <!-- 추가 섹션들 -->
-        <section id="sys1" class="content-section"><div class="ppt-viewer"><h3>시스템 기획</h3><p>PPT 이미지 및 상세 명세 내용을 이곳에 매핑하세요.</p></div></section>
-        <section id="con1" class="content-section"><div class="ppt-viewer"><h3>콘텐츠 기획</h3><p>프로젝트 경력 기반의 상세 콘텐츠 설계 자료를 매핑하세요.</p></div></section>
+        <section id="sys1" class="content-section"><div class="ppt-viewer"><h3>시스템 기획</h3><p>슬라이드 이미지 준비 중입니다.</p></div></section>
+        <section id="con1" class="content-section"><div class="ppt-viewer"><h3>콘텐츠 기획</h3><p>전투 알고리즘 및 AI 패턴 설계 자료를 매핑하세요.</p></div></section>
     </main>
 
     <script>
@@ -182,17 +177,12 @@
         function showPage(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             if(event) event.currentTarget.classList.add('active');
 
-            // 모바일에서 항목 클릭 시에만 자동으로 닫기 (사용자 편의성)
             if (window.innerWidth <= 1024) {
-                setTimeout(() => {
-                    document.body.classList.add('sidebar-closed');
-                }, 300);
+                setTimeout(() => { document.body.classList.add('sidebar-closed'); }, 300);
             }
-
             document.querySelector('main').scrollTo(0, 0);
         }
 
@@ -203,10 +193,6 @@
                 setTimeout(() => { notice.style.display = 'none'; }, 2000);
             });
         }
-
-        // 초기 설정: 모바일/데스크톱 모두 기본적으로 열린 상태로 시작 (요청 사항 반영)
-        // 만약 모바일에서 처음부터 닫고 싶다면 아래 주석을 해제하세요.
-        // if (window.innerWidth <= 1024) document.body.classList.add('sidebar-closed');
     </script>
 </body>
 </html>
