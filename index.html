@@ -83,6 +83,23 @@
         
         .ppt-viewer { background: #1e293b; border-radius: 15px; min-height: 400px; padding: 40px; border: 1px solid var(--accent); position: relative; }
 
+        /* [추가] 주요 경력 도식화 스타일 */
+        .career-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+        .career-item { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px; border-radius: 12px; transition: transform 0.2s; }
+        .career-item:hover { transform: translateY(-3px); border-color: rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.05); }
+        .career-title { font-size: 1.15rem; font-weight: bold; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .career-title::before { content: ""; display: inline-block; width: 6px; height: 18px; background: var(--accent); border-radius: 3px; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        
+        /* 공통 태그 */
+        .tag { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); color: var(--text-s); border: 1px solid rgba(255, 255, 255, 0.1); font-weight: 500; }
+        
+        /* 강조 태그 색상 분류 */
+        .tag.engine { background: rgba(59, 130, 246, 0.1); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); } /* 유니티, 언리얼 등 엔진 */
+        .tag.role { background: rgba(245, 158, 11, 0.1); color: #fcd34d; border-color: rgba(245, 158, 11, 0.3); } /* 팀장, 파트장 등 직책 */
+        .tag.launch { background: rgba(16, 185, 129, 0.1); color: #6ee7b7; border-color: rgba(16, 185, 129, 0.3); } /* 런칭 관련 */
+        .tag.live { background: rgba(168, 85, 247, 0.1); color: #d8b4fe; border-color: rgba(168, 85, 247, 0.3); } /* 라이브 관련 */
+
         @media (max-width: 1024px) {
             nav { position: fixed; height: 100%; width: 280px; box-shadow: 20px 0 50px rgba(0,0,0,0.8); }
             main { padding: 100px 20px 40px !important; }
@@ -114,6 +131,8 @@
                 <i class="fa-solid fa-address-card"></i> 소개 및 역량
             </button>
             <div class="sub-menu">
+                <!-- [추가] 주요 경력 앵커 메뉴 -->
+                <button onclick="scrollToSection('career')"><i class="fa-solid fa-briefcase"></i> 주요 경력</button>
                 <button onclick="scrollToSection('phil')"><i class="fa-solid fa-lightbulb"></i> 개발 철학</button>
                 <button onclick="scrollToSection('ai-part')"><i class="fa-solid fa-robot"></i> AI 실무 활용</button>
             </div>
@@ -126,11 +145,9 @@
             <button onclick="showPage('con1')"><i class="fa-solid fa-gamepad"></i> 콘텐츠 기획</button>
         </div>
 
-        <!-- [수정] 외부 링크 연결 구역 -->
         <div class="nav-group doc-group">
             <div class="nav-title">DOCUMENTS (EXTERNAL LINKS)</div>
             
-            <!-- 아래 href="..." 부분에 실제 링크 주소를 넣으세요 -->
             <a href="https://drive.google.com/file/d/1B2TBc-md9OE7byvf5KtHImr_oWwp97iJ/view?usp=drive_link" target="_blank" class="link-btn">
                 <i class="fa-solid fa-file-pdf"></i> 포트폴리오 (GoogleDrv 외부 링크)
             </a>
@@ -152,6 +169,111 @@
                 <p>20년 경력의 전문성을 바탕으로 게임의 본질을 설계합니다. 유니티와 언리얼5 엔진 활용 능력을 갖추어 비주얼 목업을 즉각 구현할 수 있는 실무 최적화 기획자입니다.</p>
             </div>
 
+            <!-- [추가] 주요 경력 섹션 -->
+            <div class="card" id="career">
+                <span class="highlight">◆ 주요 프로젝트 경력</span>
+                <div class="career-grid">
+                    <div class="career-item">
+                        <div class="career-title">에스카</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#언리얼5</span>
+                            <span class="tag role">#콘텐츠파트장</span>
+                            <span class="tag">#레벨디자인</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">로드나인 (Lord Nine)</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#유니티</span>
+                            <span class="tag role">#콘텐츠기획팀장</span>
+                            <span class="tag">#레벨디자인</span>
+                            <span class="tag launch">#런칭</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">미라클</div>
+                        <div class="tag-list">
+                            <span class="tag">#모바일수집형RPG</span>
+                            <span class="tag engine">#유니티</span>
+                            <span class="tag launch">#런칭</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">린 : 더 라이트브링어</div>
+                        <div class="tag-list">
+                            <span class="tag">#모바일수집형RPG</span>
+                            <span class="tag engine">#유니티</span>
+                            <span class="tag launch">#런칭</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">올라가M</div>
+                        <div class="tag-list">
+                            <span class="tag">#모바일수집형RPG</span>
+                            <span class="tag engine">#유니티</span>
+                            <span class="tag launch">#런칭</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">달을삼킨늑대</div>
+                        <div class="tag-list">
+                            <span class="tag">#모바일액션RPG</span>
+                            <span class="tag engine">#유니티</span>
+                            <span class="tag launch">#런칭</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">록맨온라인</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC액션RPG</span>
+                            <span class="tag engine">#겜브리오</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">데카론</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#카론엔진</span>
+                            <span class="tag live">#라이브</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">천도 / 크로노스</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#자체엔진</span>
+                            <span class="tag live">#라이브</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">다크에덴</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#자체엔진</span>
+                            <span class="tag live">#라이브</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">RF온라인</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#R2엔진</span>
+                            <span class="tag live">#라이브</span>
+                        </div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">구룡쟁패</div>
+                        <div class="tag-list">
+                            <span class="tag">#PC_MMORPG</span>
+                            <span class="tag engine">#트리플X</span>
+                            <span class="tag launch">#CBT~런칭</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card" id="phil">
                 <span class="highlight">◆ 개발 철학</span>
                 <p style="font-weight: 600; color: #fff; margin-bottom: 10px;">"콘텐츠의 본질은 '몰입'이며, 기획은 그 몰입의 시간을 설계하는 예술입니다."</p>
@@ -163,7 +285,7 @@
                 <p style="font-style: italic; margin-bottom: 15px; color: var(--text-s);">"AI는 생각의 확장과 시각적 커뮤니케이션을 가속화하는 저의 가장 강력한 부사수입니다."</p>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 10px;"><strong>• 논리 정교화:</strong> 기획 초안의 허점 검증 및 데이터 시뮬레이션</li>
-                    <li style="margin-bottom: 10px;"><strong>• 즉각적 시각화:</strong> 이미지 생성 AI 컨셉 아트로 개발팀과 오차 없는 소통</li>
+                    <li style="margin-bottom: 10px;"><strong>• 즉각적 시각화:</strong> 이미지 생성 AI 컨셉 아트로 아트팀과 오차 없는 소통</li>
                     <li><strong>• 효율 혁신:</strong> 데이터 분석 및 요약을 통한 본질 집중 시간 확보</li>
                 </ul>
             </div>
