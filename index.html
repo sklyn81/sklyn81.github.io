@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Planner Choi Seong-geun | Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-main: #0a0e17;
+            --sidebar-bg: #151c2c;
+            --accent: #3b82f6;
+            --text-p: #ffffff;
+            --text-s: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Pretendard', sans-serif; background: var(--bg-main); color: var(--text-p); display: flex; height: 100vh; overflow: hidden; }
+
+        /* 사이드바 */
+        nav {
+            width: 320px; background: var(--sidebar-bg); padding: 30px 20px;
+            display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+        }
+
+        .profile-area { text-align: center; margin-bottom: 30px; }
+        .profile-img { width: 120px; height: 150px; border-radius: 10px; object-fit: cover; border: 2px solid var(--accent); margin-bottom: 15px; }
+        .contact-box { background: var(--glass); padding: 15px; border-radius: 10px; font-size: 0.9rem; text-align: left; }
+        .contact-box div { margin-bottom: 5px; color: var(--accent); font-weight: bold; }
+        .contact-box span { color: var(--text-p); font-weight: normal; }
+
+        .nav-group { margin-top: 25px; }
+        .nav-title { font-size: 0.75rem; color: var(--text-s); font-weight: 800; margin-bottom: 10px; letter-spacing: 1.5px; }
+        nav button {
+            width: 100%; text-align: left; padding: 12px 15px; background: none; border: none;
+            color: var(--text-s); cursor: pointer; transition: 0.3s; font-size: 0.9rem; border-radius: 8px;
+            display: flex; align-items: center; gap: 10px; margin-bottom: 2px;
+        }
+        nav button:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        nav button.active { background: var(--accent); color: #fff; font-weight: 600; }
+
+        /* 메인 콘텐츠 */
+        main { flex: 1; padding: 50px; overflow-y: auto; scroll-behavior: smooth; }
+        .content-section { display: none; animation: fadeIn 0.4s ease-out; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { font-size: 2.2rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; margin-bottom: 20px; line-height: 1.8; }
+        .highlight { color: var(--accent); font-weight: bold; }
+        
+        .ppt-viewer { background: #1e293b; border-radius: 15px; min-height: 400px; padding: 40px; border: 1px solid var(--accent); position: relative; }
+        .ppt-tag { position: absolute; top: 20px; right: 20px; background: var(--accent); font-size: 0.7rem; padding: 4px 10px; border-radius: 4px; }
+
+        ul { padding-left: 20px; margin-top: 15px; }
+        li { margin-bottom: 10px; color: var(--text-s); }
+
+        .ai-step { border-left: 3px solid var(--accent); padding-left: 20px; margin-bottom: 30px; }
+        .ai-step h4 { color: var(--accent); margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="profile-area">
+            <!-- 썸네일 이미지 삽입 -->
+            <img src="https://i.postimg.cc/mD83zVfV/image.png" alt="최성근" class="profile-img">
+            <h3 style="margin-bottom: 10px;">최성근</h3>
+            <div class="contact-box">
+                <div>Email: <span>windcraw@naver.com</span></div>
+                <div>Phone: <span>010-9101-9360</span></div>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">INTRODUCTION</div>
+            <button onclick="showPage('intro')" class="active"><i class="fa-solid fa-address-card"></i> 지원동기 및 성격</button>
+            <button onclick="showPage('ai-strategy')"><i class="fa-solid fa-robot"></i> AI 전략적 파트너십</button>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">PROJECTS & SKILLS</div>
+            <button onclick="showPage('sys1')"><i class="fa-solid fa-gears"></i> 시스템 기획 1 (로직)</button>
+            <button onclick="showPage('sys2')"><i class="fa-solid fa-gears"></i> 시스템 기획 2 (구조)</button>
+            <button onclick="showPage('con1')"><i class="fa-solid fa-gamepad"></i> 콘텐츠 기획 1 (액션)</button>
+            <button onclick="showPage('con2')"><i class="fa-solid fa-gamepad"></i> 콘텐츠 기획 2 (협업)</button>
+            <button onclick="showPage('quest')"><i class="fa-solid fa-scroll"></i> 업적/퀘스트 시스템</button>
+            <button onclick="showPage('battle')"><i class="fa-solid fa-brain"></i> AI 및 전투 플로우</button>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">LEVEL DESIGN</div>
+            <button onclick="showPage('level2d')"><i class="fa-solid fa-map"></i> 2D 레벨 디자인</button>
+            <button onclick="showPage('level3d')"><i class="fa-solid fa-cube"></i> 3D 레벨 디자인 (UE5)</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 자기소개서 섹션 -->
+        <section id="intro" class="content-section active">
+            <h2><i class="fa-solid fa-user-tie"></i> Introduction</h2>
+            <div class="card">
+                <h3 class="highlight">◆ 지원동기</h3>
+                <p>레벨디자인과 컨텐츠 기획으로 거의 경력 전체를 대변할 수 있을 만큼 많은 시간과 노력을 해왔습니다. 게임의 전반적인 흐름과 리소스 효율적 관리, 노하우를 바탕으로 시행착오를 최소화하는 스킬을 보유하고 있습니다.</p>
+                <p style="margin-top:10px;">특히 유니티와 언리얼5 엔진을 활용해 배경팀과 협업하며 <strong>비주얼 목업(Mock-up)</strong>을 제시하고, 리소스 애셋을 추적/관리하는 데 매우 능숙합니다. 최근 5년간은 기획팀장으로서 MMORPG 프로젝트를 성공적으로 리드해 왔습니다.</p>
+            </div>
+            <div class="card">
+                <h3 class="highlight">◆ 성격의 장단점</h3>
+                <p>스스럼없고 무난한 성격으로 팀 분위기를 주도적으로 끌어올리는 타입입니다. 협업에 있어 가장 중요한 것은 업무에 대한 <strong>"신뢰"</strong>라고 생각하며, 원하는 결과물이 나올 수 있도록 부지런하게 왕래하며 소통합니다.</p>
+            </div>
+        </section>
+
+        <!-- AI 전략 섹션 -->
+        <section id="ai-strategy" class="content-section">
+            <h2><i class="fa-solid fa-microchip"></i> AI 전략적 파트너십</h2>
+            <div class="card">
+                <p style="font-style: italic; margin-bottom: 25px;">"저는 AI를 단순한 보조 도구가 아니라, '생각의 확장'과 '커뮤니케이션의 시각화'를 위한 전략적 파트너로 활용합니다."</p>
+                <div class="ai-step">
+                    <h4>1단계: 논리의 정교화 및 데이터 시뮬레이션</h4>
+                    <p>ChatGPT/Gemini를 활용해 시스템의 논리적 허점을 검증합니다. 밸런싱 공식의 엣지 케이스 시뮬레이션 및 아이디어 브레인스토밍을 통해 기획의 밀도를 높입니다.[cite: 4]</p>
+                </div>
+                <div class="ai-step">
+                    <h4>2단계: 기획 의도의 즉각적 시각화</h4>
+                    <p>Midjourney/Stable Diffusion을 활용해 텍스트 중심의 설명 대신 명확한 컨셉 아트를 제시합니다. 이는 개발팀의 이해도를 획기적으로 높이고 Rework 비용을 줄여줍니다.[cite: 4]</p>
+                </div>
+                <div class="ai-step">
+                    <h4>3단계: 협업 효율성 혁신</h4>
+                    <p>NotebookLM 등으로 방대한 데이터를 요약하고 인사이트를 도출합니다. 18년의 직관에 AI라는 엔진을 달아 가장 빠르고 정확하게 기획 의도를 실현합니다.[cite: 4]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D 레벨 디자인 섹션 (강점) -->
+        <section id="level3d" class="content-section">
+            <h2><i class="fa-solid fa-mountain-sun"></i> 3D 레벨 디자인 (UE5)</h2>
+            <div class="ppt-viewer">
+                <span class="ppt-tag">MAJOR STRENGTH</span>
+                <h3 style="margin-bottom: 20px;">현업 3D 실무 및 엔진 활용 능력</h3>
+                <div class="card" style="background: rgba(0,0,0,0.3);">
+                    <strong>● NX3게임즈 '로드나인' (2021.4 ~ 2024.3)</strong>
+                    <ul>
+                        <li>약 44개 이상의 필드맵 및 던전 제작 총괄 (256x256 ~ 1024)[cite: 4]</li>
+                        <li>레벨툴 설계 및 후디니(Houdini) 기반 절차적 레벨 디자인 대응[cite: 4]</li>
+                        <li>3년 동안 40개가 넘는 맵 컨텐츠를 물리적 한계 내에서 고퀄리티로 완료[cite: 4]</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: rgba(0,0,0,0.3);">
+                    <strong>● 모비릭스 '에스카' (2024.5 ~ 2025.12)</strong>
+                    <ul>
+                        <li>언리얼5 CubeGrid 및 모델링 모드 툴을 활용한 효율적 서사 전달[cite: 4]</li>
+                        <li>모듈러 던전 시스템 구축 및 아트팀과의 기획 의도 동기화[cite: 4]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 콘텐츠 기획 1 (과거 경력 반영) -->
+        <section id="con1" class="content-section">
+            <h2><i class="fa-solid fa-sword"></i> 콘텐츠 기획 (액션/패턴)</h2>
+            <div class="ppt-viewer">
+                <h3 style="margin-bottom: 15px;">횡스크롤 액션 및 전투 알고리즘</h3>
+                <p>네오위즈 '록맨온라인', 위메이드 '달을 삼킨 늑대' 개발 경력 보유[cite: 4]</p>
+                <ul style="margin-top: 20px;">
+                    <li><strong>선임 기획자 역임:</strong> 게임 내 프랍, 몬스터 전투 알고리즘 설계[cite: 4]</li>
+                    <li><strong>전투 AI 구현:</strong> 몬스터 공략 방식 및 콤비네이션 스킬 타격감 집중 설계[cite: 4]</li>
+                    <li><strong>몰이사냥 최적화:</strong> 유저에게 최상의 피드백을 주는 스킬 루프 설계[cite: 4]</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Placeholder Sections -->
+        <section id="sys1" class="content-section"><div class="ppt-viewer"><h3>시스템 기획 1</h3><p>PPT의 논리 설계/데이터 테이블 자료를 이곳에 삽입하세요.</p></div></section>
+        <section id="sys2" class="content-section"><div class="ppt-viewer"><h3>시스템 기획 2</h3><p>PPT의 시스템 아키텍처/UI 플로우 자료를 이곳에 삽입하세요.</p></div></section>
+        <section id="con2" class="content-section"><div class="ppt-viewer"><h3>협업 및 커뮤니케이션</h3><p>아트/프로그래머 팀과의 신뢰 기반 협업 노하우 상세.</p></div></section>
+        <section id="quest" class="content-section"><div class="ppt-viewer"><h3>업적/퀘스트 시스템</h3><p>PPT의 퀘스트 구조 및 보상 설계 자료 삽입.</p></div></section>
+        <section id="battle" class="content-section"><div class="ppt-viewer"><h3>AI 및 전투 플로우</h3><p>몬스터 패턴 및 전투 상태 머신(FSM) 설계 자료 삽입.</p></div></section>
+        <section id="level2d" class="content-section"><div class="ppt-viewer"><h3>2D 레벨 디자인</h3><p>과거 횡스크롤 및 탑뷰 맵 구조 설계 자료 삽입.</p></div></section>
+
+    </main>
+
+    <script>
+        function showPage(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            document.querySelector('main').scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
