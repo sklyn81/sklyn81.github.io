@@ -22,7 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg-main); color: var(--text-p); display: flex; height: 100vh; overflow: hidden; }
 
-        /* [변경] 커스텀 햄버거 버튼 (이미지 요청 디자인 반영) */
+        /* [디자인] 커스텀 햄버거 버튼 */
         .menu-toggle {
             position: fixed; top: 20px; left: 20px; z-index: 1001;
             background: var(--close-bg); 
@@ -32,21 +32,9 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .menu-toggle span {
-            display: block; width: 4px; height: 24px; 
-            background: var(--line-color); border-radius: 10px;
-            transition: all 0.4s ease;
-        }
-
-        /* 닫혔을 때 스타일 (파란색 + 가로줄 3개) */
-        body.sidebar-closed .menu-toggle {
-            background: var(--accent);
-            flex-direction: column;
-        }
-        body.sidebar-closed .menu-toggle span {
-            width: 24px; height: 4px;
-        }
+        .menu-toggle span { display: block; width: 4px; height: 24px; background: var(--line-color); border-radius: 10px; transition: all 0.4s ease; }
+        body.sidebar-closed .menu-toggle { background: var(--accent); flex-direction: column; }
+        body.sidebar-closed .menu-toggle span { width: 24px; height: 4px; }
 
         /* 사이드바 */
         nav {
@@ -59,13 +47,13 @@
 
         .profile-area { text-align: center; margin-bottom: 30px; }
         .profile-img { width: 120px; height: 150px; border-radius: 10px; object-fit: cover; border: 2px solid var(--accent); margin-bottom: 15px; }
-
         .contact-box { background: var(--glass); padding: 15px; border-radius: 10px; font-size: 0.85rem; text-align: left; }
         .contact-box div { margin-bottom: 8px; color: var(--accent); font-weight: bold; }
         .contact-box span { color: var(--text-p); font-weight: normal; }
 
         .nav-group { margin-top: 25px; }
-        .nav-title { font-size: 0.75rem; color: var(--text-s); font-weight: 800; margin-bottom: 10px; letter-spacing: 1.5px; }
+        .nav-title { font-size: 0.75rem; color: var(--text-s); font-weight: 800; margin-bottom: 10px; letter-spacing: 1.5px; opacity: 0.6; }
+        
         nav button, .link-btn {
             width: 100%; text-align: left; padding: 14px 15px; background: none; border: none;
             color: var(--text-s); cursor: pointer; transition: 0.3s; font-size: 0.95rem; border-radius: 8px;
@@ -74,45 +62,37 @@
         nav button:hover, .link-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
         nav button.active { background: var(--accent); color: #fff; font-weight: 600; }
 
-        .sub-menu { margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 5px; margin-bottom: 10px; }
-        .sub-menu button { padding: 10px 15px; font-size: 0.85rem; }
+        /* [수정] 서브 메뉴 스타일 (체크하신 부분) */
+        .sub-menu { margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 5px; margin-top: 2px; margin-bottom: 10px; }
+        .sub-menu button { padding: 10px 15px; font-size: 0.85rem; color: var(--text-s); }
+        .sub-menu button i { font-size: 0.8rem; opacity: 0.7; }
 
+        /* [수정] 하단 문서 영역 (체크하신 부분) */
         .doc-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); }
-        .link-btn { background: #1e293b; color: #fff; font-weight: 500; }
+        .link-btn { background: #1e293b; color: #fff; font-weight: 500; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.05); }
+        .link-btn i { color: #f87171; font-size: 1.1rem; }
 
         /* 메인 콘텐츠 */
         main { flex: 1; padding: 40px 40px 40px 60px; overflow-y: auto; transition: 0.4s; position: relative; scroll-behavior: smooth; }
         body.sidebar-closed main { padding-left: 90px; }
 
-        .content-section { display: none; animation: fadeIn 0.4s ease-out; max-width: 1200px; margin: 0 auto; }
+        .content-section { display: none; animation: fadeIn 0.4s ease-out; max-width: 1300px; margin: 0 auto; }
         .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.99); } to { opacity: 1; transform: scale(1); } }
 
         h2 { font-size: 2.2rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; color: var(--text-p); }
         .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; margin-bottom: 25px; line-height: 1.8; }
         .highlight { color: var(--accent); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
 
-        /* [추가] 이미지 그리드 시스템 */
-        .image-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 25px; 
-            margin-top: 20px; 
-        }
-        .image-card { 
-            background: #1e293b; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s ease;
-        }
+        /* 이미지 그리드 */
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 25px; margin-top: 20px; }
+        .image-card { background: #1e293b; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
         .image-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .image-card img { width: 100%; height: auto; display: block; transition: 0.3s; }
-        .image-card:hover img { opacity: 0.8; }
-        .image-info { padding: 15px; font-size: 0.9rem; color: var(--text-s); background: rgba(0,0,0,0.2); }
+        .image-card img { width: 100%; height: auto; display: block; cursor: pointer; }
+        .image-info { padding: 15px; font-size: 0.9rem; color: var(--text-s); background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.05); }
 
-        /* 경력 그리드 (기존 유지) */
-        .career-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
+        /* 경력 아이템 (기존 스타일 유지) */
+        .career-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
         .career-item { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px; border-radius: 12px; }
         .career-title { font-size: 1.15rem; font-weight: bold; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .career-title::before { content: ""; display: inline-block; width: 6px; height: 18px; background: var(--accent); border-radius: 3px; }
@@ -127,9 +107,8 @@
         }
     </style>
 </head>
-<body class="">
+<body>
 
-    <!-- 커스텀 햄버거 버튼 -->
     <button class="menu-toggle" onclick="toggleSidebar()">
         <span></span><span></span><span></span>
     </button>
@@ -152,6 +131,7 @@
             <button onclick="showPage('intro')" class="active" id="btn-intro">
                 <i class="fa-solid fa-address-card"></i> 소개 및 역량
             </button>
+            <!-- [수정] 들여쓰기 서브 메뉴 -->
             <div class="sub-menu">
                 <button onclick="scrollToSection('career')"><i class="fa-solid fa-briefcase"></i> 주요 경력</button>
                 <button onclick="scrollToSection('phil')"><i class="fa-solid fa-lightbulb"></i> 개발 철학</button>
@@ -165,16 +145,19 @@
             <button onclick="showPage('con1')" id="btn-con1"><i class="fa-solid fa-gamepad"></i> 그 외 작업</button>
         </div>
 
+        <!-- [수정] 하단 문서 링크 영역 -->
         <div class="nav-group doc-group">
             <div class="nav-title">DOCUMENTS</div>
             <a href="https://drive.google.com/file/d/1B2TBc-md9OE7byvf5KtHImr_oWwp97iJ/view" target="_blank" class="link-btn">
-                <i class="fa-solid fa-file-pdf" style="color:#f87171;"></i> 포트폴리오 PDF
+                <i class="fa-solid fa-file-pdf"></i> 포트폴리오 PDF
+            </a>
+            <a href="https://drive.google.com/file/d/19r0gSrB8jTq3MCXTDLg_Q_MCSt0JhbsC/view" target="_blank" class="link-btn">
+                <i class="fa-solid fa-file-lines"></i> 이력서&경력기술서
             </a>
         </div>
     </nav>
 
     <main id="main-content">
-        <!-- 소개 섹션 -->
         <section id="intro" class="content-section active">
             <h2><i class="fa-solid fa-user-tie"></i> Introduction</h2>
             <div class="card">
@@ -187,93 +170,70 @@
                 <div class="career-grid">
                     <div class="career-item"><div class="career-title">로드나인</div><div class="tag-list"><span class="tag">#PC_MMORPG</span><span class="tag engine">#유니티</span></div></div>
                     <div class="career-item"><div class="career-title">에스카</div><div class="tag-list"><span class="tag">#PC_MMORPG</span><span class="tag engine">#언리얼5</span></div></div>
-                    <!-- 기타 경력 리스트 생략 가능 -->
                 </div>
             </div>
+
+            <div class="card" id="phil">
+                <span class="highlight">◆ 개발 철학</span>
+                <p>"콘텐츠의 본질은 몰입입니다." 사용자 경험(UX)을 중심으로 재미의 흐름을 설계합니다.</p>
+            </div>
         </section>
 
-        <!-- [변경] 콘텐츠 & 레벨디자인 (l_img) -->
         <section id="level3d" class="content-section">
             <h2><i class="fa-solid fa-mountain-sun"></i> 콘텐츠 & 레벨디자인</h2>
-            <div class="image-grid" id="grid-level3d">
-                <!-- JS에서 1~17번까지 자동 생성 -->
-            </div>
+            <div class="image-grid" id="grid-level3d"></div>
         </section>
 
-        <!-- [변경] 시스템 기획 (s_img) -->
         <section id="sys1" class="content-section">
             <h2><i class="fa-solid fa-gears"></i> 시스템 기획</h2>
-            <div class="image-grid" id="grid-sys1">
-                <!-- JS에서 1~6번까지 자동 생성 -->
-            </div>
+            <div class="image-grid" id="grid-sys1"></div>
         </section>
 
-        <!-- [변경] 그 외 작업 (e_img) -->
         <section id="con1" class="content-section">
-            <h2><i class="fa-solid fa-gamepad"></i> 그 외 프로젝트 작업</h2>
-            <div class="image-grid" id="grid-con1">
-                <!-- JS에서 1~4번까지 자동 생성 -->
-            </div>
+            <h2><i class="fa-solid fa-gamepad"></i> 그 외 작업</h2>
+            <div class="image-grid" id="grid-con1"></div>
         </section>
     </main>
 
     <script>
-        // 사이드바 토글
-        function toggleSidebar() {
-            document.body.classList.toggle('sidebar-closed');
-        }
+        function toggleSidebar() { document.body.classList.toggle('sidebar-closed'); }
 
-        // 페이지 전환
         function showPage(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             const targetBtn = document.getElementById('btn-' + id);
             if(targetBtn) targetBtn.classList.add('active');
-
-            if (window.innerWidth <= 1024) {
-                setTimeout(() => { document.body.classList.add('sidebar-closed'); }, 300);
-            }
+            if (window.innerWidth <= 1024) { setTimeout(() => { document.body.classList.add('sidebar-closed'); }, 300); }
             document.getElementById('main-content').scrollTo(0, 0);
         }
-
-        // 이미지 그리드 동적 생성 함수
-        function generateImageGrid(containerId, folder, prefix, start, end, fileNamePrefix = "") {
-            const container = document.getElementById(containerId);
-            let html = '';
-            for (let i = start; i <= end; i++) {
-                // 규칙: l_img/img_1.png, s_img/s_img1.png, e_img/c_img1.png
-                const fileName = `${fileNamePrefix}${i}.png`;
-                html += `
-                    <div class="image-card">
-                        <a href="${folder}/${fileName}" target="_blank">
-                            <img src="${folder}/${fileName}" alt="Project Image ${i}" onerror="this.parentElement.parentElement.style.display='none'">
-                        </a>
-                        <div class="image-info">자료 이미지 #${i}</div>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
-
-        // 초기 실행: 이미지 로드
-        window.onload = () => {
-            // l_img (img_1 ~ img_17)
-            generateImageGrid('grid-level3d', 'l_img', 'img_', 1, 17, 'img_');
-            // s_img (s_img1 ~ s_img6)
-            generateImageGrid('grid-sys1', 's_img', 's_img', 1, 6, 's_img');
-            // e_img (c_img1 ~ c_img4)
-            generateImageGrid('grid-con1', 'e_img', 'c_img', 1, 4, 'c_img');
-        };
 
         function scrollToSection(sectionId) {
             showPage('intro');
             const target = document.getElementById(sectionId);
-            if (target) {
-                setTimeout(() => { target.scrollIntoView({ behavior: 'smooth' }); }, 100);
-            }
+            if (target) { setTimeout(() => { target.scrollIntoView({ behavior: 'smooth' }); }, 100); }
         }
+
+        function generateImageGrid(containerId, folder, fileNamePrefix, start, end) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            let html = '';
+            for (let i = start; i <= end; i++) {
+                const fileName = `${fileNamePrefix}${i}.png`;
+                html += `
+                    <div class="image-card">
+                        <img src="${folder}/${fileName}" alt="Image ${i}" onclick="window.open(this.src)" onerror="this.parentElement.style.display='none'">
+                        <div class="image-info">프로젝트 자료 #${i}</div>
+                    </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        window.onload = () => {
+            generateImageGrid('grid-level3d', 'l_img', 'img_', 1, 17);
+            generateImageGrid('grid-sys1', 's_img', 's_img', 1, 6);
+            generateImageGrid('grid-con1', 'e_img', 'c_img', 1, 4);
+        };
 
         function copyEmail(email) {
             navigator.clipboard.writeText(email).then(() => {
