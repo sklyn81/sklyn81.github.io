@@ -22,89 +22,80 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg-main); color: var(--text-p); display: flex; height: 100vh; overflow: hidden; }
 
-        /* [디자인] 커스텀 햄버거 버튼 */
+        /* 햄버거 버튼 디자인 */
         .menu-toggle {
             position: fixed; top: 20px; left: 20px; z-index: 1001;
-            background: var(--close-bg); 
-            border: none; width: 50px; height: 50px; border-radius: 12px;
-            cursor: pointer; display: flex; flex-direction: row; 
-            align-items: center; justify-content: center; gap: 4px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--close-bg); border: none; width: 50px; height: 50px; border-radius: 12px;
+            cursor: pointer; display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: all 0.4s ease;
         }
         .menu-toggle span { display: block; width: 4px; height: 24px; background: var(--line-color); border-radius: 10px; transition: all 0.4s ease; }
         body.sidebar-closed .menu-toggle { background: var(--accent); flex-direction: column; }
         body.sidebar-closed .menu-toggle span { width: 24px; height: 4px; }
 
-        /* 사이드바 */
+        /* 사이드바 레이아웃 */
         nav {
-            width: var(--sidebar-width); background: var(--sidebar-bg); padding: 85px 20px 30px;
+            width: var(--sidebar-width); background: var(--sidebar-bg); padding: 85px 0 30px 20px;
             display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.1);
-            overflow-y: auto; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; flex-shrink: 0; z-index: 1000;
+            overflow-y: auto; transition: 0.4s ease; position: relative; flex-shrink: 0; z-index: 1000;
         }
-        body.sidebar-closed nav { margin-left: calc(var(--sidebar-width) * -1); opacity: 0; pointer-events: none; }
+        body.sidebar-closed nav { margin-left: calc(var(--sidebar-width) * -1); opacity: 0; }
 
-        .profile-area { text-align: center; margin-bottom: 30px; }
+        .profile-area { text-align: center; margin-bottom: 30px; padding-right: 20px; }
         .profile-img { width: 120px; height: 150px; border-radius: 10px; object-fit: cover; border: 2px solid var(--accent); margin-bottom: 15px; }
-        .contact-box { background: var(--glass); padding: 15px; border-radius: 10px; font-size: 0.85rem; text-align: left; }
-        .contact-box div { margin-bottom: 8px; color: var(--accent); font-weight: bold; }
+        .contact-box { background: var(--glass); padding: 15px; border-radius: 10px; font-size: 0.82rem; text-align: left; margin: 0 10px; }
+        .contact-box div { margin-bottom: 6px; color: var(--accent); font-weight: bold; }
         .contact-box span { color: var(--text-p); font-weight: normal; }
 
-        .nav-group { margin-top: 25px; }
-        .nav-title { font-size: 0.75rem; color: var(--text-s); font-weight: 800; margin-bottom: 10px; letter-spacing: 1.5px; opacity: 0.6; }
+        /* 메뉴 버튼 스타일 */
+        .nav-group { margin-top: 25px; padding-right: 0px; }
+        .nav-title { font-size: 0.7rem; color: var(--text-s); font-weight: 800; margin-bottom: 12px; letter-spacing: 1px; opacity: 0.5; padding-left: 5px; }
         
         nav button, .link-btn {
-            width: 100%; text-align: left; padding: 14px 15px; background: none; border: none;
-            color: var(--text-s); cursor: pointer; transition: 0.3s; font-size: 0.95rem; border-radius: 8px;
-            display: flex; align-items: center; gap: 10px; margin-bottom: 4px; text-decoration: none;
+            width: 100%; text-align: left; padding: 12px 15px; background: none; border: none;
+            color: var(--text-s); cursor: pointer; transition: 0.2s; font-size: 0.9rem; border-radius: 8px 0 0 8px;
+            display: flex; align-items: center; gap: 12px; margin-bottom: 4px; text-decoration: none;
         }
-        nav button:hover, .link-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-        nav button.active { background: var(--accent); color: #fff; font-weight: 600; }
+        nav button:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        nav button.active { background: var(--accent) !important; color: #fff !important; font-weight: 600; }
 
-        /* [수정] 서브 메뉴 스타일 (체크하신 부분) */
-        .sub-menu { margin-left: 20px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 5px; margin-top: 2px; margin-bottom: 10px; }
-        .sub-menu button { padding: 10px 15px; font-size: 0.85rem; color: var(--text-s); }
-        .sub-menu button i { font-size: 0.8rem; opacity: 0.7; }
+        /* 서브 메뉴 */
+        .sub-menu { margin-left: 25px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 5px; margin-top: 2px; padding-right: 20px; }
+        .sub-menu button { padding: 8px 15px; font-size: 0.82rem; border-radius: 6px; }
 
-        /* [수정] 하단 문서 영역 (체크하신 부분) */
-        .doc-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); }
-        .link-btn { background: #1e293b; color: #fff; font-weight: 500; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.05); }
-        .link-btn i { color: #f87171; font-size: 1.1rem; }
+        /* 하단 문서 영역 */
+        .doc-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); padding-right: 20px; }
+        .link-btn { background: rgba(255,255,255,0.05); color: #fff; margin-bottom: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
 
         /* 메인 콘텐츠 */
-        main { flex: 1; padding: 40px 40px 40px 60px; overflow-y: auto; transition: 0.4s; position: relative; scroll-behavior: smooth; }
-        body.sidebar-closed main { padding-left: 90px; }
-
-        .content-section { display: none; animation: fadeIn 0.4s ease-out; max-width: 1300px; margin: 0 auto; }
+        main { flex: 1; padding: 40px 60px; overflow-y: auto; scroll-behavior: smooth; }
+        .content-section { display: none; animation: fadeIn 0.3s ease; max-width: 1200px; margin: 0 auto; }
         .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.99); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { font-size: 2.2rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; color: var(--text-p); }
-        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; margin-bottom: 25px; line-height: 1.8; }
-        .highlight { color: var(--accent); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
+        h2 { font-size: 2rem; margin-bottom: 35px; display: flex; align-items: center; gap: 15px; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.08); padding: 30px; border-radius: 15px; margin-bottom: 25px; }
+        .highlight { color: var(--accent); font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 12px; }
 
-        /* 이미지 그리드 */
-        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 25px; margin-top: 20px; }
-        .image-card { background: #1e293b; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .image-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .image-card img { width: 100%; height: auto; display: block; cursor: pointer; }
-        .image-info { padding: 15px; font-size: 0.9rem; color: var(--text-s); background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.05); }
+        /* [추가] AI 활용 역량 스타일 */
+        .ai-usage { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .ai-item { background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid var(--accent); flex: 1; min-width: 200px; }
+        .ai-item b { color: var(--accent); display: block; margin-bottom: 5px; }
 
-        /* 경력 아이템 (기존 스타일 유지) */
-        .career-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin-top: 15px; }
-        .career-item { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px; border-radius: 12px; }
-        .career-title { font-size: 1.15rem; font-weight: bold; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .career-title::before { content: ""; display: inline-block; width: 6px; height: 18px; background: var(--accent); border-radius: 3px; }
+        /* 경력 그리드 복구 */
+        .career-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
+        .career-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; }
+        .career-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .career-title::before { content: ""; width: 4px; height: 16px; background: var(--accent); border-radius: 2px; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tag { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); color: var(--text-s); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .tag { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-s); border: 1px solid rgba(255,255,255,0.1); }
         .tag.engine { color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
 
-        @media (max-width: 1024px) {
-            nav { position: fixed; height: 100%; width: 280px; box-shadow: 20px 0 50px rgba(0,0,0,0.8); }
-            main { padding: 100px 20px 40px !important; }
-            .image-grid { grid-template-columns: 1fr; }
-        }
+        /* 이미지 그리드 */
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; margin-top: 20px; }
+        .image-card { background: #1a2235; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .image-card img { width: 100%; height: auto; display: block; cursor: pointer; }
+        .image-info { padding: 12px 15px; font-size: 0.85rem; color: var(--text-s); background: rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
@@ -116,11 +107,10 @@
     <nav id="sidebar">
         <div class="profile-area">
             <img src="thumbnail_img.png" alt="최성근" class="profile-img">
-            <h3 style="margin-bottom: 10px;">최성근</h3>
+            <h3 style="margin-bottom: 8px;">최성근</h3>
             <div class="contact-box">
-                <div style="cursor:pointer;" onclick="copyEmail('windcraw@naver.com')">
-                    Email: <span>windcraw@naver.com</span> <i class="fa-regular fa-copy" style="font-size: 0.7rem;"></i>
-                    <span id="copyNotice" style="color: #10b981; font-size: 0.7rem; display: none;">복사됨!</span>
+                <div onclick="copyEmail('windcraw@naver.com')" style="cursor:pointer">
+                    Email: <span>windcraw@naver.com</span> <i class="fa-regular fa-copy"></i>
                 </div>
                 <div>Phone: <span>010-9101-9360</span></div>
             </div>
@@ -131,10 +121,10 @@
             <button onclick="showPage('intro')" class="active" id="btn-intro">
                 <i class="fa-solid fa-address-card"></i> 소개 및 역량
             </button>
-            <!-- [수정] 들여쓰기 서브 메뉴 -->
             <div class="sub-menu">
                 <button onclick="scrollToSection('career')"><i class="fa-solid fa-briefcase"></i> 주요 경력</button>
                 <button onclick="scrollToSection('phil')"><i class="fa-solid fa-lightbulb"></i> 개발 철학</button>
+                <button onclick="scrollToSection('ai')"><i class="fa-solid fa-robot"></i> AI 활용 역량</button>
             </div>
         </div>
 
@@ -145,14 +135,13 @@
             <button onclick="showPage('con1')" id="btn-con1"><i class="fa-solid fa-gamepad"></i> 그 외 작업</button>
         </div>
 
-        <!-- [수정] 하단 문서 링크 영역 -->
         <div class="nav-group doc-group">
             <div class="nav-title">DOCUMENTS</div>
             <a href="https://drive.google.com/file/d/1B2TBc-md9OE7byvf5KtHImr_oWwp97iJ/view" target="_blank" class="link-btn">
-                <i class="fa-solid fa-file-pdf"></i> 포트폴리오 PDF
+                <i class="fa-solid fa-file-pdf" style="color:#ff4d4d"></i> 포트폴리오 PDF
             </a>
             <a href="https://drive.google.com/file/d/19r0gSrB8jTq3MCXTDLg_Q_MCSt0JhbsC/view" target="_blank" class="link-btn">
-                <i class="fa-solid fa-file-lines"></i> 이력서&경력기술서
+                <i class="fa-solid fa-file-lines" style="color:#4d94ff"></i> 이력서&경력기술서
             </a>
         </div>
     </nav>
@@ -160,22 +149,40 @@
     <main id="main-content">
         <section id="intro" class="content-section active">
             <h2><i class="fa-solid fa-user-tie"></i> Introduction</h2>
+            
             <div class="card">
                 <span class="highlight">◆ 지원동기 및 전문성</span>
                 <p>20년 경력의 전문성을 바탕으로 게임의 본질을 설계합니다. 유니티와 언리얼5 엔진 활용 능력을 갖추어 비주얼 목업을 즉각 구현할 수 있는 실무 최적화 기획자입니다.</p>
             </div>
 
+            <!-- 주요 프로젝트 경력 복구 -->
             <div class="card" id="career">
                 <span class="highlight">◆ 주요 프로젝트 경력</span>
                 <div class="career-grid">
-                    <div class="career-item"><div class="career-title">로드나인</div><div class="tag-list"><span class="tag">#PC_MMORPG</span><span class="tag engine">#유니티</span></div></div>
-                    <div class="career-item"><div class="career-title">에스카</div><div class="tag-list"><span class="tag">#PC_MMORPG</span><span class="tag engine">#언리얼5</span></div></div>
+                    <div class="career-item">
+                        <div class="career-title">로드나인</div>
+                        <div class="tag-list"><span class="tag">#PC_MMORPG</span><span class="tag engine">#유니티</span></div>
+                    </div>
+                    <div class="career-item">
+                        <div class="career-title">에스카</div>
+                        <div class="tag-list"><span class="tag">#PC_MMORPG</span><span class="tag engine">#언리얼5</span></div>
+                    </div>
                 </div>
             </div>
 
             <div class="card" id="phil">
                 <span class="highlight">◆ 개발 철학</span>
                 <p>"콘텐츠의 본질은 몰입입니다." 사용자 경험(UX)을 중심으로 재미의 흐름을 설계합니다.</p>
+            </div>
+
+            <!-- AI 활용도 추가 -->
+            <div class="card" id="ai">
+                <span class="highlight">◆ AI 활용 역량 (Productivity)</span>
+                <div class="ai-usage">
+                    <div class="ai-item"><b>ChatGPT / Claude</b> 기획서 초안 작성 및 로직 검증 최적화</div>
+                    <div class="ai-item"><b>Midjourney</b> 레벨 디자인 및 콘텐츠 컨셉 비주얼라이징</div>
+                    <div class="ai-item"><b>Copilot</b> 시스템 기획 및 수치 밸런싱 스크립트 보조</div>
+                </div>
             </div>
         </section>
 
@@ -204,7 +211,6 @@
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             const targetBtn = document.getElementById('btn-' + id);
             if(targetBtn) targetBtn.classList.add('active');
-            if (window.innerWidth <= 1024) { setTimeout(() => { document.body.classList.add('sidebar-closed'); }, 300); }
             document.getElementById('main-content').scrollTo(0, 0);
         }
 
@@ -214,33 +220,28 @@
             if (target) { setTimeout(() => { target.scrollIntoView({ behavior: 'smooth' }); }, 100); }
         }
 
-        function generateImageGrid(containerId, folder, fileNamePrefix, start, end) {
+        function generateGrid(containerId, folder, prefix, start, end) {
             const container = document.getElementById(containerId);
-            if(!container) return;
             let html = '';
             for (let i = start; i <= end; i++) {
-                const fileName = `${fileNamePrefix}${i}.png`;
-                html += `
-                    <div class="image-card">
-                        <img src="${folder}/${fileName}" alt="Image ${i}" onclick="window.open(this.src)" onerror="this.parentElement.style.display='none'">
-                        <div class="image-info">프로젝트 자료 #${i}</div>
-                    </div>`;
+                const src = `${folder}/${prefix}${i}.png`;
+                html += `<div class="image-card">
+                    <img src="${src}" onclick="window.open(this.src)" onerror="this.parentElement.style.display='none'">
+                    <div class="image-info">자료 이미지 #${i}</div>
+                </div>`;
             }
             container.innerHTML = html;
         }
 
         window.onload = () => {
-            generateImageGrid('grid-level3d', 'l_img', 'img_', 1, 17);
-            generateImageGrid('grid-sys1', 's_img', 's_img', 1, 6);
-            generateImageGrid('grid-con1', 'e_img', 'c_img', 1, 4);
+            generateGrid('grid-level3d', 'l_img', 'img_', 1, 17);
+            generateGrid('grid-sys1', 's_img', 's_img', 1, 6);
+            generateGrid('grid-con1', 'e_img', 'c_img', 1, 4);
         };
 
         function copyEmail(email) {
-            navigator.clipboard.writeText(email).then(() => {
-                const notice = document.getElementById('copyNotice');
-                notice.style.display = 'inline';
-                setTimeout(() => { notice.style.display = 'none'; }, 2000);
-            });
+            navigator.clipboard.writeText(email);
+            alert("이메일 주소가 복사되었습니다.");
         }
     </script>
 </body>
