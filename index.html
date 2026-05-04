@@ -66,6 +66,33 @@
         .doc-group { margin-top: auto; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); padding-right: 20px; }
         .link-btn { background: rgba(255,255,255,0.05); color: #fff; margin-bottom: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
 
+        /* AI 툴 전용 뱃지 스타일 */
+        .ai-badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 15px 0;
+}
+
+    .ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(59, 130, 246, 0.12); /* 연한 푸른색 배경 */
+        color: #93c5fd;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+}
+
+    .ai-badge i {
+        font-size: 0.85rem;
+        color: var(--accent); /* 포인트 컬러 */
+}
+        
         /* 메인 콘텐츠 영역 */
         main { flex: 1; padding: 40px 60px; overflow-y: auto; scroll-behavior: smooth; }
         .content-section { display: none; animation: fadeIn 0.3s ease; max-width: 1200px; margin: 0 auto; }
@@ -371,44 +398,45 @@
             </div>
 
             <!-- AI 실무 활용 섹션 (업그레이드 버전) -->
+<!-- Strategic AI Integrator 섹션 내부 -->
 <div class="card" id="ai-part">
     <span class="highlight">◆ Strategic AI Integrator</span>
-    <p style="font-style: italic; margin-bottom: 25px; color: var(--text-s); border-left: 3px solid var(--accent); padding-left: 15px;">
-        "AI는 단순한 도구가 아닙니다. 생각의 지평을 넓히고 시각적 소통의 오차를 '제로'로 수렴시키는 저의 가장 강력한 <b>디지털 부사수</b>입니다."
+    <p style="font-style: italic; color: var(--text-s); margin-bottom: 25px;">
+        "AI는 단순한 도구가 아닙니다. 생각의 지평을 넓히고 시각적 소통의 오차를 '제로'로 수렴시키는 저의 가장 강력한 디지털 부사수입니다."
     </p>
 
-    <div class="ai-grid">
-        <!-- 1. 논리 및 시스템 -->
-        <div class="ai-card-v2">
-            <div class="ai-header">
-                <div class="ai-icon-circle"><i class="fa-solid fa-brain"></i></div>
-                <h4>논리 정교화 및 시스템 설계</h4>
-            </div>
-            <div class="ai-tags">
-                <span class="ai-tag">#Claude_3.5</span>
-                <span class="ai-tag">#ChatGPT_4o</span>
-                <span class="ai-tag">#Perplexity</span>
-            </div>
-            <p class="ai-desc">
-                복잡한 게임 메커니즘의 <b>예외 케이스(Edge Case)를 사전 검토</b>하여 기획 결함을 최소화합니다. Python을 활용한 드랍률 및 밸런스 <b>수치 시뮬레이션</b>
-            </p>
+    <!-- 1. 논리 정교화 -->
+    <div style="margin-bottom: 25px;">
+        <h4 style="color:#fff; font-size:1rem; margin-bottom:8px;"><i class="fa-solid fa-brain" style="margin-right:8px;"></i> 논리 정교화 및 시스템 설계</h4>
+        <div class="ai-badge-group">
+            <span class="ai-badge"><i class="fa-solid fa-microchip"></i> Claude 3.5</span>
+            <span class="ai-badge"><i class="fa-solid fa-message"></i> ChatGPT 4o</span>
+            <span class="ai-badge"><i class="fa-solid fa-magnifying-glass"></i> Perplexity</span>
         </div>
+        <p style="font-size:0.9rem; color:var(--text-s);">복잡한 게임 메커니즘의 예외 케이스(Edge Case)를 사전 검토하여 기획 결함을 최소화합니다. Python을 활용한 드랍률 및 밸런스 수치 시뮬레이션</p>
+    </div>
 
-        <!-- 2. 시각화 -->
-        <div class="ai-card-v2">
-            <div class="ai-header">
-                <div class="ai-icon-circle"><i class="fa-solid fa-palette"></i></div>
-                <h4>즉각적 시각화 및 컨셉 구체화</h4>
-            </div>
-            <div class="ai-tags">
-                <span class="ai-tag">#Midjourney</span>
-                <span class="ai-tag">#Stable_Diffusion</span>
-                <span class="ai-tag">#Runway</span>
-            </div>
-            <p class="ai-desc">
-                레벨 디자인 무드 보드와 컨셉 아트를 신속히 생성하여 <b>아트팀과의 소통 비용을 50% 이상 절감</b>합니다. UI/UX 배치를 위한 프로토타입 이미지를 시연합니다.
-            </p>
+    <!-- 2. 즉각적 시각화 -->
+    <div style="margin-bottom: 25px;">
+        <h4 style="color:#fff; font-size:1rem; margin-bottom:8px;"><i class="fa-solid fa-palette" style="margin-right:8px;"></i> 즉각적 시각화 및 컨셉 구체화</h4>
+        <div class="ai-badge-group">
+            <span class="ai-badge"><i class="fa-solid fa-image"></i> Midjourney</span>
+            <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Stable Diffusion</span>
+            <span class="ai-badge"><i class="fa-solid fa-video"></i> Runway</span>
         </div>
+        <p style="font-size:0.9rem; color:var(--text-s);">레벨 디자인 무드 보드와 컨셉 아트를 신속히 생성하여 아트팀과의 소통 비용을 50% 이상 절감합니다. UI/UX 배치를 위한 프로토타입 이미지를 시연합니다.</p>
+    </div>
+
+    <!-- 3. 사용자 경험 -->
+    <div>
+        <h4 style="color:#fff; font-size:1rem; margin-bottom:8px;"><i class="fa-solid fa-user-gear" style="margin-right:8px;"></i> 사용자 경험(UX) 및 시나리오</h4>
+        <div class="ai-badge-group">
+            <span class="ai-badge"><i class="fa-solid fa-gem"></i> Gemini</span>
+            <span class="ai-badge"><i class="fa-solid fa-pen-nib"></i> Sudowrite</span>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-s);">세계관 설정 및 퀘스트 대사 초안을 작성하여 내러티브를 확장합니다. 대규모 유저 피드백 데이터를 요약 분석하여 핵심 개선 사항을 도출합니다.</p>
+    </div>
+</div>
 
         <!-- 3. UX 및 시나리오 -->
         <div class="ai-card-v2">
